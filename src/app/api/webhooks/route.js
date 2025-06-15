@@ -70,7 +70,7 @@ export async function POST(req) {
         );
         // if user is created successfully, we use the mongoDb id and save it inside clerk. See syntax from clerk docs
         if (user && eventType === 'user.created') {
-            // updating the id by taking the clerk id to find the user and update it in clerk
+            // updating the id by taking the clerk id to find the user and update it in clerk. we add the mongoDb id to the public metadata of the user so that we can authenticate the user at the frontend bcz at the backend we have user id in the mongodb database, and in the clerk we have also added to authenticate the users.
             try {
                 await clerkClient.users.updateUserMetadata(id, {
                     publicMetadata: {
